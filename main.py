@@ -51,11 +51,13 @@ Accuracy: {percentage}\n"""
     def __read_input(self, prompt):
         loc = 0
         mask = list(prompt)
-        start = time.time()
+        start = None
         errs = 0
         with self.t.cbreak():
             while loc < len(prompt):
                 val = self.t.inkey()
+                if not start:
+                    start = time.time()
                 if val.name == 'KEY_BACKSPACE':
                     if loc != 0:
                         loc -= 1
